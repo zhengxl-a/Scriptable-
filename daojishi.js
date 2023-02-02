@@ -34,9 +34,9 @@ function getwidget(total, haveGone, str)
   titlew.textColor = new Color("#e587ce")
   titlew.font = Font.boldSystemFont(13)
   m_lishWidget.addSpacer(6)
-  const imgw = m_lishWidget.addImage(creatProgress(total,haveGone))
-  imgw.imageSize=new Size(m_width, m_height)
-  m_lishWidget.addSpacer(6)
+  //const imgw = m_lishWidget.addImage(creatProgress(total,haveGone))
+  //imgw.imageSize=new Size(m_width, m_height)
+  //m_lishWidget.addSpacer(6)
 }
 
 function creatProgress(total,havegone)
