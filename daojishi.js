@@ -1,53 +1,61 @@
 
-const width=125
-const h=5
-const w = new ListWidget()
-w.backgroundColor=new Color("#222222")
+const m_width=125
+const m_height=5
+const m_lishWidget = new ListWidget()
+m_lishWidget.backgroundColor=new Color("#222222")
 
-const now = new Date()
-const weekday = now.getDay() == 0 ? 6 : now.getDay() - 1
-const minutes=now.getMinutes() 
-if(Device.locale() == "zh_CN"){
-getwidget(24*60, (now.getHours() + 1)*60+minutes, "今日")
-getwidget(7, weekday + 1, "本周")
-getwidget(30, now.getDate() + 1, "本月")
-getwidget(12, now.getMonth() + 1, "今年")
-}else{
+const m_nowDate = new Date()
+const m_weekday = m_nowDate.getDay() == 0 ? 6 : m_nowDate.getDay() - 1
+const m_minutes=m_nowDate.getMinutes() 
 
-getwidget(24*60, (now.getHours() + 1)*60+minutes, "Today")
-getwidget(7, weekday + 1, "This week")
-getwidget(30, now.getDate() + 1, "This month")
-getwidget(12, now.getMonth() + 1, "This year")
+if(Device.locale() == "zh_CN")
+{
+  getwidget(24*60, (m_nowDate.getHours() + 1)*60 + m_minutes, "今日")
+  getwidget(7, m_weekday + 1, "本周")
+  getwidget(30, m_nowDate.getDate() + 1, "本月")
+  getwidget(12, m_nowDate.getMonth() + 1, "今年")
 }
-Script.setWidget(w)
-Script.complete()
-w.presentMedium()
+else
+{
+  getwidget(24*60, (m_nowDate.getHours() + 1)*60+m_minutes, "Today")
+  getwidget(7, m_weekday + 1, "This week")
+  getwidget(30, m_nowDate.getDate() + 1, "This month")
+  getwidget(12, m_nowDate.getMonth() + 1, "This year")
+}
 
-function getwidget(total, haveGone, str) {
-  const titlew = w.addText(str)
+Script.setWidget(m_lishWidget)
+Script.complete()
+
+m_lishWidget.presentMedium()
+
+function getwidget(total, haveGone, str) 
+{
+  const titlew = m_lishWidget.addText(str)
   titlew.textColor = new Color("#e587ce")
   titlew.font = Font.boldSystemFont(13)
-  w.addSpacer(6)
-  const imgw = w.addImage(creatProgress(total,haveGone))
-  imgw.imageSize=new Size(width, h)
-  w.addSpacer(6)
+  m_lishWidget.addSpacer(6)
+  const imgw = m_lishWidget.addImage(creatProgress(total,haveGone))
+  imgw.imageSize=new Size(m_width, m_height)
+  m_lishWidget.addSpacer(6)
 }
 
-function creatProgress(total,havegone){
-const context =new DrawContext()
-context.size=new Size(width, h)
-context.opaque=false
-context.respectScreenScale=true
-context.setFillColor(new Color("#48484b"))
-const path = new Path()
-path.addRoundedRect(new Rect(0, 0, width, h), 3, 2)
-context.addPath(path)
-context.fillPath()
-context.setFillColor(new Color("#ffd60a"))
-const path1 = new Path()
-path1.addRoundedRect(new Rect(0, 0, width*havegone/total, h), 3, 2)
-context.addPath(path1)
-context.fillPath()
-return context.getImage()
+function creatProgress(total,havegone)
+{
+  const context =new DrawContext()
+  context.size=new Size(m_width, m_height)
+  context.opaque=false
+  context.respectScreenScale=true
+  context.setFillColor(new Color("#48484b"))
+  const path = new Path()
+  path.addRoundedRect(new Rect(0, 0, m_width, m_height), 3, 2)
+  context.addPath(path)
+  context.fillPath()
+  context.setFillColor(new Color("#ffd60a"))
+  const path1 = new Path()
+  path1.addRoundedRect(new Rect(0, 0, m_width*havegone/total, m_height), 3, 2)
+  context.addPath(path1)
+  context.fillPath()
+  return context.getImage()
 }
+
 
