@@ -1,4 +1,3 @@
-
 const m_width=125
 const m_height=5
 const m_lishWidget = new ListWidget()
@@ -8,6 +7,7 @@ const m_nowDate = new Date()
 const m_weekday = m_nowDate.getDay() == 0 ? 6 : m_nowDate.getDay() - 1
 const m_minutes=m_nowDate.getMinutes() 
 
+//IF
 if(Device.locale() == "zh_CN")
 {
   getwidget(24*60, (m_nowDate.getHours() + 1)*60 + m_minutes, "今日")
@@ -23,10 +23,12 @@ else
   getwidget(12, m_nowDate.getMonth() + 1, "This year")
 }
 
+
 Script.setWidget(m_lishWidget)
 Script.complete()
 
 m_lishWidget.presentMedium()
+
 
 function getwidget(total, haveGone, str) 
 {
@@ -34,9 +36,9 @@ function getwidget(total, haveGone, str)
   titlew.textColor = new Color("#e587ce")
   titlew.font = Font.boldSystemFont(13)
   m_lishWidget.addSpacer(6)
-  //const imgw = m_lishWidget.addImage(creatProgress(total,haveGone))
-  //imgw.imageSize=new Size(m_width, m_height)
-  //m_lishWidget.addSpacer(6)
+  const imgw = m_lishWidget.addImage(creatProgress(total,haveGone))
+  imgw.imageSize=new Size(m_width, m_height)
+  m_lishWidget.addSpacer(6)
 }
 
 function creatProgress(total,havegone)
@@ -57,5 +59,4 @@ function creatProgress(total,havegone)
   context.fillPath()
   return context.getImage()
 }
-
 
